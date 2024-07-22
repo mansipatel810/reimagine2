@@ -1410,14 +1410,7 @@ function Xcaliberbikes(){
 
 
 
-const cursor = document.querySelector('.cursor');
 
-const updateCursorPosition = (e) => {
-  cursor.style.left = `${e.pageX}px`;
-  cursor.style.top = `${e.pageY}px`;
-};
-
-document.addEventListener('mousemove', updateCursorPosition);
 
 
 
