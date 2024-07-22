@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        
+        .slider-container {
+            display: flex;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 91%;
+            position: relative;
+            
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: black;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            background-color: rgba(128, 128, 128, 0.523);
+            height: 60px;
+            width: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 30px;
+
+        }
+       
+
+        .slider-arrow.left {
+            left: 10px;
+        }
+
+        .slider-arrow.right {
+            right: 10px;
+        }
+
+        .product-container {
+            display: flex;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            top: -8%;
+            
+        }
+
+        .product {
+            position: absolute;
+           
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .center-product {
+            opacity: 1 !important;
+            
+            z-index: 1;
+            position: relative;
+             
+        }
+
+.name {
+    position: absolute;
+    width: 100%;
+    top: 15%;
+    color: rgb(243, 236, 236);
+    text-align: center;
+    font-size: 1.9rem;
+    margin-bottom: 50px;
+z-index: 777;
+font-weight: 600;
+
+
+
+}
+
+.cursor{
+    position:fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    transition: 0.1s;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+    z-index: 999999;
+    mix-blend-mode: difference;
+}
+.name:hover ~ .cursor{
+    transform: scale(3);
+}
+
+
+        .details {
+            position: absolute;
+            top: 90%; 
+            width: 100%;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 150px;
+            font-size: 1.2rem;
+            
+
+            
+            
+        }
+       
+        
+
+        .gradient-text {
+    /* background: linear-gradient(to right, #a8a8a8, #fff, #dedede); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.button {
+  padding: 2px 2px;
+  border: none;
+  border-radius: 5px;
+  
+  
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #e4ebec;
+  transition: all 1000ms;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+ 
+}
+
+button:hover {
+  color: #000000;
+  transform: scale(1.1);
+  
+  box-shadow: 4px 5px 17px -4px #f8f8f8;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #dae4e6;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+button:hover::before {
+  width: 250%;
+}
+
+
+
+
+
+
+
+    </style>
+</head>
+
+<body class="bg-black">
+    <div class="categories w-full h-screen  py-6">
+        <div class="cursor"></div>
+       
+        <nav class="text-zinc-100 text-[17px] font-medium capitalize flex  justify-center items-center gap-4   text-black">
+            
+             
+              <button id="Checkpoint" class="button ">
+                <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                 Checkpoint</button>
+                
+                <button id="Domane" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Domane</button>
+                    
+                <button id="dualSport" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Dual Sport</button>
+                    
+                <button id="FX" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    FX Bikes</button>
+                    
+                <button id="fuelEX" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Fuel EX</button>
+                    
+                <button id="madone" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                     madone</button>
+                    
+                <button id="Marlin" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Marlin</button>
+                    
+                    
+                <button id="Procaliber" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Procaliber</button>
+                    
+                <button id="Roscoe" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Roscoe</button>
+                    
+                <button id="speedConcept" class="button leading-tight py-2">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Speed Concept</button>
+                    
+                <button id="Supercaliber" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                     Supercaliber</button>
+                
+                <button id="topFuel" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Top Fuel</button>
+                
+                <button id="Verve" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                     Verve</button>
+                
+                <button id="xCaliber" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    X-Caliber</button>
+    
+                <button id="emonda" class="button">
+                    <!-- <img src="./images/wheel.png" class="imgIcon" alt=""> -->
+                    Émonda    </h1></button>
+        </nav>
+
+       
+
+        <div class="page1 relative w-full h-screen ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">CHECKPOINT</h1>
+            </div>
+            
+            <div id="Checkpoint" class="w-full h-screen absolute z-[2]">
+                <div>
+                    <div id="name3" class="name hover-this"></div>
+                    
+                </div>
+                
+                <div id="slider-container3" class="slider-container">
+                    <div id="slider-arrow3" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow3" class="slider-arrow right">&gt;</div>
+                    <div id="products3" class="product-container products">
+                        
+                    </div>
+                    <div id="details3" class="details ">
+                        <div id="color3" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price3" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page2  relative w-full h-screen ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">DOMANE</h1>
+            </div>
+            
+            <div id="Domane" class="w-full h-screen absolute z-[200]">
+                <div>
+                    <div id="name4" class="name hover-this"></div>
+                    
+                </div>
+                <div id="slider-container4" class="slider-container">
+                    <div id="slider-arrow4" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow4" class="slider-arrow right">&gt;</div>
+                    <div id="products4" class="product-container products">
+                        
+                    </div>
+                    <div id="details4" class="details ">
+                        <div id="color4" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price4" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page3  relative w-full h-screen  ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">DUALSPORT</h1>
+            </div>
+            
+            <div id="dualSport" class="w-full h-screen absolute z-[200]">
+                <div>
+                    <div id="name5" class="name hover-this"></div>
+                   
+                </div>
+                <div id="slider-container5" class="slider-container">
+                    <div id="slider-arrow5" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow5" class="slider-arrow right">&gt;</div>
+                    <div id="products5" class="product-container  products">
+                        
+                    </div>
+                    <div id="details5" class="details">
+                        <div id="color5" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price5" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page4  relative w-full h-screen  ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">FX</h1>
+            </div>
+            
+            <div id="FX" class="w-full h-screen absolute z-[200]">
+                <div id="name6" class="name hover-this"></div>
+                <div id="slider-container6" class="slider-container">
+                    <div id="slider-arrow6" class="slider-arrow left"><i class="ri-arrow-left-wide-fill"></i></div>
+                    <div id="slider-arrow6" class="slider-arrow right"><i class="ri-arrow-right-wide-line"></i></div>
+                    <div id="products6" class="product-container products">
+                        
+                    </div>
+                    <div id="details6" class="details ">
+                        <div id="color6" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price6" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page5  relative w-full h-screen">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[200px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">FUEL EX</h1>
+            </div>
+            
+            <div id="fuelEX" class="w-full h-screen ">
+                <div id="name7" class="name hover-this ">Fuel EX 5 Gen 6</div>
+                <div id="slider-container7" class="slider-container ">
+                    
+                    <div id="products7" class="product-container7 flex absolute w-[100%] h-[100%] items-center justify-center top-[5%]  products ">
+                        
+                    </div>
+                    <div id="details7" class="details flex gap-20">
+                        <div id="color7" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"> Matte Blue Sage</div></div>
+                        <div id="price7" class="price"><div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none">₹270,199</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page6 relative w-full h-screen ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">MADONE</h1>
+            </div>
+            
+            <div id="madone" class="w-full h-screen absolute z-[200]">
+                <div id="name1" class="name hover-this"></div>
+                <div id="slider-container1" class="slider-container">
+                    <div id="slider-arrow1" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow1" class="slider-arrow right">&gt;</div>
+                    <div id="products1" class="product-container products">
+                        
+                    </div>
+                    <div class="details ">
+                        <div id="color1" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price1" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page7  relative w-full h-screen  ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">MARLIN</h1>
+            </div>
+            
+            <div id="Marlin" class="w-full h-screen absolute z-[200]">
+                <div id="name8" class="name hover-this"></div>
+                <div id="slider-container8" class="slider-container">
+                    <div id="slider-arrow8" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow8" class="slider-arrow right">&gt;</div>
+                    <div id="products8" class="product-container products">
+                        
+                    </div>
+                    <div id="details8" class="details ">
+                        <div id="color8" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price8" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page8  relative w-full h-screen  ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">PROCALIBER</h1>
+            </div>
+            
+            <div id="Procaliber" class="w-full h-screen absolute z-[200]">
+                <div id="name9" class="name hover-this"></div>
+                <div id="slider-container9" class="slider-container">
+                    <div id="slider-arrow9" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow9" class="slider-arrow right">&gt;</div>
+                    <div id="products9" class="product-container products">
+                        
+                    </div>
+                    <div id="details9" class="details ">
+                        <div id="color9" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price9" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page9  relative w-full h-screen  ">
+            <div class="backtext absolute text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">ROSCOE</h1>
+            </div>
+            
+            <div id="roscue" class="w-full  h-[100%] absolute z-[200]">
+                <div id="name10" class="name hover-this">Roscoe 6</div>
+                <div id="slider-container10" class="slider-container">
+                    
+                    <div id="products10" class="product-container10 flex absolute w-[100%] h-[100%] items-center justify-center top-[5%]   -translate-y-1/20 products">
+                        
+                    </div>
+                    <div id="details10" class="details ">
+                        <div id="color10" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none">Waterloo Blue</div></div>
+                        <div id="price10" class="price"><div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none">₹77,899</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page10  relative w-full h-screen  ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">SPEEDCONCEPT</h1>
+            </div>
+            
+            <div id="speedconcept" class="w-full h-screen absolute  z-[200]">
+                <div id="name11" class="name hover-this ">Speed Concept SLR 7</div>
+                <div id="slider-container11" class="slider-container">
+                    
+                    <div id="products11" class="product-container11 flex absolute w-[100%] h-[100%] items-center justify-center top-[10%] -left-[3%]   -translate-y-1/10 products">
+                        
+                    </div>
+                    <div id="details11" class="details ">
+                        <div id="color11" class="color">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none">Gloss Trek Black</div></div>
+                        <div id="price11" class="price">
+                             <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none">₹879,199</div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page11  relative w-full h-screen  ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">SUPERCALIBER</h1>
+            </div>
+            
+            <div id="Supercaliber" class="w-full h-screen absolute z-[200]">
+                <div id="name12" class="name hover-this"></div>
+                <div id="slider-container12" class="slider-container">
+                    <div id="slider-arrow12" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow12" class="slider-arrow right">&gt;</div>
+                    <div id="products12" class="product-container products">
+                        
+                    </div>
+                    <div id="details12" class="details ">
+                        <div id="color12" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price12" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page12  relative w-full h-screen  ">
+            <div class="backtext absolute text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">TOPFUEL</h1>
+            </div>
+            
+            <div id="topfuel" class="w-full h-screen absolute z-[200]">
+                <div id="name13" class="name hover-this">Top Fuel 9.7 Gen 3</div>
+                <div id="slider-container13" class="slider-container">
+                    
+                    <div id="products13" class="product-container13 flex absolute w-[100%] h-[100%] items-center justify-center top-[10%]   -translate-y-1/10 products">
+                        
+                    </div>
+                    <div id="details13" class="details ">
+                        <div id="color13" class="color">  <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none">Blue Smoke</div></div>
+                        <div id="price13" class="price"><div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none">₹384,699</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page13  relative w-full h-screen  ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">VERVE</h1>
+            </div>
+            
+            <div id="Verve" class="w-full h-screen absolute z-[200]">
+                <div id="name14" class="name hover-this"></div>
+                <div id="slider-container14" class="slider-container">
+                    <div id="slider-arrow14" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow14" class="slider-arrow right">&gt;</div>
+                    <div id="products14" class="product-container products">
+                        
+                    </div>
+                    <div id="details14" class="details ">
+                        <div id="color14" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price14" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page14  relative w-full h-screen  ">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">X-CALIBER</h1>
+            </div>
+            
+            <div id="xcaliber" class="w-full h-screen absolute z-[200]">
+                <div id="name15" class="name hover-this"></div>
+                <div id="slider-container15" class="slider-container">
+                    <div id="slider-arrow15" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow15" class="slider-arrow right">&gt;</div>
+                    <div id="products15" class="product-container products">
+                        
+                    </div>
+                    <div id="details15" class="details ">
+                        <div id="color15" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price15" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page15 relative w-full h-screen">
+            <div class="backtext absolute  text-center top-[40%] font-semibold font-rockstar left-[50%] -translate-x-1/2 -translate-y-1/2 text-[210px] z-[0]  scale-90 bg-gradient-to-r from-zinc-700 via-white/80 to-zinc-500 bg-clip-text text-transparent opacity-40 z-[0]">
+                <h1 class="gradient-text">ÉMONDA</h1>
+            </div>
+            
+            <div id="Émonda" class="w-full h-screen ">
+                <div id="name2" class="name hover-this"></div>
+                <div id="slider-container2" class="slider-container">
+                    <div id="slider-arrow2" class="slider-arrow left">&lt;</div>
+                    <div id="slider-arrow2" class="slider-arrow right">&gt;</div>
+                    <div id="products2" class="product-container products">
+                        
+                    </div>
+
+
+                    <div id="details2" class="details ">
+                        <div id="color2" class="color">
+                            <div class="btn bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+                        <div id="price2" class="price">
+                            <div class="price bg-zinc-700 text-white px-4 py-2 rounded-full transition duration-200 ease-in-out hover:bg-zinc-900 active:bg-black focus:outline-none"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
